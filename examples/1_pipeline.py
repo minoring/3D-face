@@ -10,7 +10,8 @@ import matplotlib.pyplot as plt
 
 sys.path.append('..')
 import face3d
-from face3d import mesh
+from face3d.mesh.transform import angle2matrix 
+from face3d.mesh.transform import transform 
 
 # 1. Load mesh data
 # mesh data consists of: vertices, triangles, color(optional), texture(optional)
@@ -26,7 +27,7 @@ colors = colors / np.max(colors)
 # space. target size=180 for example
 s = 180 / (np.max(vertices[:, 1]) - np.min(vertices[:, 1]))
 # Rotate 30 degree
-R = mesh.transform.angle2matrix([0, 30, 0])
+R = angle2matrix([0, 30, 0])
 # No translation. center of object: [0, 0, 0]
 t = [0, 0, 0]
-transformed_vertices = mesh.transform.similarity_transform(vertices, s, R, t)
+transformed_vertices = transform(vertices, s, R, t)
